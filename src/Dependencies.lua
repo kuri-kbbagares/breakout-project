@@ -1,7 +1,17 @@
+-- Library Files 
 push = require 'lib/push'
-
 Class = require 'lib/class'
 
+-- [[ Include every files in here to make each other connected ]]
+
+-- On "src" folder
+require 'src/Brick'
+require 'src/LevelMaker'
+require 'src/StateMachine'
 require 'src/Util'
 
-require 'src/states/MenuState'
+
+-- On "src/states" folder
+require 'src/states/BaseState'
+require 'src/states/PlayState'
+
