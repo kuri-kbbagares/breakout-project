@@ -1,20 +1,14 @@
---[[
-   
-    Represents the state the game is in when we've just started like a Title Screen.
-]]
-
--- the "__includes" bit here means we're going to inherit all of the methods
--- that BaseState has, so it will have empty versions of all StateMachine methods
--- even if we don't override them ourselves; handy to avoid superfluous code!
+--This initiate StartState in main.lua
 StartState = Class{__includes = BaseState}
 
--- whether we're highlighting "Start" or "High Scores"
+--A helping var. for the highlighting of the menus
 local highlighted = 1
 
 --[[function StartState:enter(params)
     self.highScores = params.highScores
 end
-]] -- EDIT THIS FOR CONVENIENCE
+]] -- EDIT THIS FOR CONVENIENCE (DON"T TOUCH)
+
 function StartState:update(dt)
     -- toggle highlighted option if we press an arrow key up or down
     if love.keyboard.wasPressed('up') or love.keyboard.wasPressed('down') then
@@ -27,7 +21,12 @@ function StartState:update(dt)
         --gSounds['confirm']:play()
 
         if highlighted == 1 then
-            gStateMachine:change('play')
+            gStateMachine:change('play', {
+        paddle = Paddle(),
+        bricks = LevelMaker.createMap(),
+        health = 3,
+        ball = Ball(1)
+    })
         end
     end
 

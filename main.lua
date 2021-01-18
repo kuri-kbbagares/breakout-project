@@ -13,6 +13,12 @@ function love.load()
 
     love.window.setTitle('Breakout Project')
     
+    gFonts = {
+      ['smallFont'] = love.graphics.newFont('font/font.ttf', 8),
+      ['mediumFont'] = love.graphics.newFont('font/font.ttf', 16),
+      ['largeFont'] = love.graphics.newFont('font/font.ttf', 32)
+      }
+    
     gSprites = {
         ['background'] = love.graphics.newImage('sprites/background.png'),
         ['blocks'] = love.graphics.newImage('sprites/blocks.png'),
