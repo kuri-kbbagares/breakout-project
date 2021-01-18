@@ -38,20 +38,33 @@ function love.load()
     })
 
     gStateMachine = StateMachine {
+        ['start'] = function() return StartState()
+          end,
         ['play'] = function() return PlayState() end
     }
     -- Change the state here manually or remove this if other states was created
-    gStateMachine:change('play', {
-        paddle = Paddle(),
-        bricks = LevelMaker.createMap(),
-        health = 3,
-        ball = Ball(1)
-    })
+    gStateMachine:change('start')
+    --?Another Table for keys being Pressed
+    love.keyboard.keysPressed = {}    
+end
 
+function love.keypressed(key)
+  --?sets a key into true when love.keypressed(key) is called
+  love.keyboard.keysPressed[key] = true
+end
+
+function love.keyboard.wasPressed(key)
+  --a function used to tell if a key is pressed by declaring it as an argument
+  if love.keyboard.keysPressed[key] then
+    return true
+  else
+    return false
+  end
 end
 
 function love.update()
     gStateMachine:update()
+    love.keyboard.keysPressed = {}
 
 end
 
