@@ -6,6 +6,8 @@ WINDOW_HEIGHT = 720
 VIRTUAL_WIDTH = 432
 VIRTUAL_HEIGHT = 243
 
+MOVEMENT_OF_PADDLE = 200 
+
 function love.load()
     love.graphics.setDefaultFilter('nearest', 'nearest')
 
@@ -62,8 +64,8 @@ function love.keyboard.wasPressed(key)
   end
 end
 
-function love.update()
-    gStateMachine:update()
+function love.update(dt)
+    gStateMachine:update(dt)
     love.keyboard.keysPressed = {}
 
 end
