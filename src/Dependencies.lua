@@ -14,4 +14,5 @@ require 'src/Util'
 -- On "src/states" folder
 require 'src/states/BaseState'
 require 'src/states/PlayState'
+require 'src/states/StartState'
 
