@@ -13,12 +13,6 @@ function love.load()
 
     love.window.setTitle('Breakout Project')
     
-    gFonts = {
-      ['smallFont'] = love.graphics.newFont('font/font.ttf', 8),
-      ['mediumFont'] = love.graphics.newFont('font/font.ttf', 16),
-      ['largeFont'] = love.graphics.newFont('font/font.ttf', 32)
-      }
-    
     gSprites = {
         ['background'] = love.graphics.newImage('sprites/background.png'),
         ['blocks'] = love.graphics.newImage('sprites/blocks.png'),
@@ -27,7 +21,9 @@ function love.load()
 
     gFrames = {
         ['paddle'] = GenerateQuadsPaddles(gSprites['blocks']),
-        ['bricks'] = GenerateQuadsBricks(gSprites['blocks'])
+        ['bricks'] = GenerateQuadsBricks(gSprites['blocks']),
+        ['balls'] = GenerateQuadsBalls(gSprites['blocks']),
+        ['hearts'] = GenerateQuads(gSprites['hearts'], 10, 9)
     }
 
     push:setupScreen(VIRTUAL_WIDTH, VIRTUAL_HEIGHT, WINDOW_WIDTH, WINDOW_HEIGHT, {
@@ -36,36 +32,16 @@ function love.load()
     })
 
     gStateMachine = StateMachine {
-      ['start'] = function() return StartState() end,
-      ['play'] = function() return PlayState() end
+        ['play'] = function() return PlayState() end
     }
     -- Change the state here manually
-    gStateMachine:change('start')
-    
-    --?Table For keys being Pressed
-    love.keyboard.keysPressed = {}
+    gStateMachine:change('play')
 
 end
 
 function love.update()
     gStateMachine:update()
-    --?Another Table for keys being Pressed
-    love.keyboard.keysPressed = {}
 
-end
-
-function love.keypressed(key)
-  --?Set the keyPressed in StateMachine To true
-  love.keyboard.keysPressed[key] = true
-end
-
-function love.keyboard.wasPressed(key)
-  --?
-  if love.keyboard.keysPressed[key] then
-    return true
-  else
-    return false
-  end
 end
 
 function love.draw()
