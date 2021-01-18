@@ -8,6 +8,7 @@ Class = require 'lib/class'
 require 'src/Ball'
 require 'src/Brick'
 require 'src/LevelMaker'
+require 'src/Paddle'
 require 'src/StateMachine'
 require 'src/Util'
 

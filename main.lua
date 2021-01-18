@@ -34,8 +34,13 @@ function love.load()
     gStateMachine = StateMachine {
         ['play'] = function() return PlayState() end
     }
-    -- Change the state here manually
-    gStateMachine:change('play')
+    -- Change the state here manually or remove this if other states was created
+    gStateMachine:change('play', {
+        paddle = Paddle(),
+        bricks = LevelMaker.createMap(),
+        health = 3,
+        ball = Ball(1)
+    })
 
 end
 
@@ -51,10 +56,19 @@ function love.draw()
     local backgroundHeight = gSprites['background']:getHeight()
 
     love.graphics.draw(gSprites['background'], 0, 0, 0, VIRTUAL_WIDTH / (backgroundWidth - 1), VIRTUAL_HEIGHT / (backgroundHeight - 1))
-
-    love.graphics.draw(gSprites['blocks'], gFrames['paddle'], VIRTUAL_WIDTH / 2 - 32, VIRTUAL_HEIGHT - VIRTUAL_HEIGHT / 10)
     
     gStateMachine:render()
 
     push:apply('end')
+end
+
+function renderHealth(health)
+    
+    local healthX = VIRTUAL_WIDTH - 50
+
+    for i = 1, health do
+        love.graphics.draw(gSprites['hearts'], gFrames['hearts'][1], healthX, 4)
+        healthX = healthX + 11
+    end
+
 end
