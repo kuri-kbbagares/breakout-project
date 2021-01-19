@@ -1,9 +1,5 @@
 PlayState = Class{__includes = BaseState}
 
-function PlayState:init()
-  self.paddle = Paddle()
-end
-
 function PlayState:enter(params)
     self.paddle = params.paddle
     self.bricks = params.bricks
@@ -16,7 +12,7 @@ function PlayState:enter(params)
 end
 
 function PlayState:update(dt)
-    self.paddle:update(dt)
+
     
 end
 
