@@ -32,6 +32,8 @@ function love.load()
         ['bricks'] = GenerateQuadsBricks(gSprites['blocks']),
         ['balls'] = GenerateQuadsBalls(gSprites['blocks']),
         ['hearts'] = GenerateQuads(gSprites['hearts'], 10, 9)
+        --needs update
+        --['particle'] = love.graphics.newImage('graphics/particle.png')
     }
 
     push:setupScreen(VIRTUAL_WIDTH, VIRTUAL_HEIGHT, WINDOW_WIDTH, WINDOW_HEIGHT, {
