@@ -22,8 +22,9 @@ function StartState:update(dt)
 
         if highlighted == 1 then
             gStateMachine:change('play', {
+        level = 32,
         paddle = Paddle(),
-        bricks = LevelMaker.createMap(),
+        bricks = LevelMaker.createMap(1),
         health = 3,
         ball = Ball(1)
     })

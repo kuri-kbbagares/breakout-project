@@ -24,7 +24,8 @@ function love.load()
     gSprites = {
         ['background'] = love.graphics.newImage('sprites/background.png'),
         ['blocks'] = love.graphics.newImage('sprites/blocks.png'),
-        ['hearts'] = love.graphics.newImage('sprites/hearts.png')
+        ['hearts'] = love.graphics.newImage('sprites/hearts.png'),
+        ['particle'] = love.graphics.newImage('sprites/particle.png')
     }
 
     gFrames = {
@@ -42,8 +43,7 @@ function love.load()
     })
 
     gStateMachine = StateMachine {
-        ['start'] = function() return StartState()
-          end,
+        ['start'] = function() return StartState() end,
         ['play'] = function() return PlayState() end
     }
     -- Change the state here manually or remove this if other states was created

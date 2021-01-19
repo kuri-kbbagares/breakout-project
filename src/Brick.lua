@@ -25,12 +25,6 @@ paletteColors = {
         ['g'] = 123,
         ['b'] = 186
     },
-    -- gold
-    [5] = {
-        ['r'] = 251,
-        ['g'] = 242,
-        ['b'] = 54
-    }
 }
 
 function Brick:init(x, y)
@@ -77,7 +71,7 @@ function Brick:hit()
     if self.tier > 0 then
         if self.color == 1 then
             self.tier = self.tier - 1
-            self.color = 5
+            self.color = 4
         else
             self.color = self.color - 1
         end
@@ -104,7 +98,7 @@ end
 function Brick:render()
     if self.inPlay then
         love.graphics.draw(gSprites['blocks'], 
-            gFrames['bricks'][1 + ((self.color - 1) * 4) + self.tier],
+            gFrames['bricks'][self.color],
             self.x, self.y)
     end
 end
