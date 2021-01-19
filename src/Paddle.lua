@@ -22,7 +22,7 @@ function Paddle:update(dt)
   elseif love.keyboard.isDown('right') then
     self.dx = MOVEMENT_OF_PADDLE
   else
-    self.dx = 0 --0 so that it will stop moving relative to dt
+    self.dx = 0 
   end
   
   if self.dx < 0 then
