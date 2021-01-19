@@ -6,8 +6,6 @@ function PaddleSelectState:enter(params)
 end
 
 function PaddleSelectState:init()
-    -- the paddle we're highlighting; will be passed to the ServeState
-    -- when we press Enter
     self.currentPaddle = 1
 end
 
@@ -28,17 +26,16 @@ function PaddleSelectState:update(dt)
         end
     end
 
-    -- select paddle and move on to the serve state, passing in the selection
     if love.keyboard.wasPressed('return') or love.keyboard.wasPressed('enter') then
         gSounds['confirm']:play()
 
         gStateMachine:change('serve', {
             paddle = Paddle(self.currentPaddle),
-            bricks = LevelMaker.createMap(32),
+            bricks = LevelMaker.createMap(1),
             health = 3,
             score = 0,
             highScores = self.highScores,
-            level = 32,
+            level = 1,
             recoverPoints = 5000
         })
     end
@@ -64,7 +61,7 @@ function PaddleSelectState:render()
         love.graphics.setColor(40, 40, 40, 128)
     end
     
-    love.graphics.draw(gTextures['arrows'], gFrames['arrows'][1], VIRTUAL_WIDTH / 4 - 24,
+    love.graphics.draw(gSprites['arrows'], gFrames['arrows'][1], VIRTUAL_WIDTH / 4 - 24,
         VIRTUAL_HEIGHT - VIRTUAL_HEIGHT / 3)
    
     -- reset drawing color to full white for proper rendering
@@ -77,13 +74,13 @@ function PaddleSelectState:render()
         love.graphics.setColor(40, 40, 40, 128)
     end
     
-    love.graphics.draw(gTextures['arrows'], gFrames['arrows'][2], VIRTUAL_WIDTH - VIRTUAL_WIDTH / 4,
+    love.graphics.draw(gSprites['arrows'], gFrames['arrows'][2], VIRTUAL_WIDTH - VIRTUAL_WIDTH / 4,
         VIRTUAL_HEIGHT - VIRTUAL_HEIGHT / 3)
     
     -- reset drawing color to full white for proper rendering
     love.graphics.setColor(255, 255, 255, 255)
 
     -- draw the paddle itself, based on which we have selected
-    love.graphics.draw(gTextures['main'], gFrames['paddles'][2 + 4 * (self.currentPaddle - 1)],
+    love.graphics.draw(gSprites['main'], gFrames['paddles'][2 + 4 * (self.currentPaddle - 1)],
         VIRTUAL_WIDTH / 2 - 32, VIRTUAL_HEIGHT - VIRTUAL_HEIGHT / 3)
 end
