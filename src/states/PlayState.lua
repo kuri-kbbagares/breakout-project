@@ -1,8 +1,9 @@
 PlayState = Class{__includes = BaseState}
 
-function PlayState:init()
+--[[function PlayState:init()
   self.paddle = Paddle()
-end
+  self.ball
+end]]
 
 function PlayState:enter(params)
     self.paddle = params.paddle
@@ -15,6 +16,8 @@ function PlayState:enter(params)
 
     self.ball.x = VIRTUAL_WIDTH / 2 - 4
     self.ball.y = VIRTUAL_HEIGHT - 42
+    self.ball.dx = math.random(-200, 200)
+    self.ball.dy = math.random(-50, -60)
 
 end
 
@@ -62,7 +65,7 @@ function PlayState:update(dt)
 
             brick:hit()
 
-            if self.score > self.recoverPoints then
+            --[[if self.score > self.recoverPoints then
 
                 self.health = math.min(3, self.health + 1)
 
@@ -70,7 +73,7 @@ function PlayState:update(dt)
 
                 --update
                 --gSounds['recover']:play()
-            end
+            end]]--
 
             if self:checkVictory() then
                 --update
@@ -86,6 +89,7 @@ function PlayState:update(dt)
                     recoverPoints = self.recoverPoints
                 })
             end
+            
 
             if self.ball.x + 2 < brick.x and self.ball.dx > 0 then
 
@@ -120,12 +124,12 @@ function PlayState:update(dt)
         --update
         --gSounds['hurt']:play()
 
-        if self.health == 0 then
+        --[[if self.health == 0 then
             gStateMachine:change('game-over', {
                 score = self.score,
                 highScores = self.highScores
             })
-        else
+        else]]
             gStateMachine:change('serve', {
                 paddle = self.paddle,
                 bricks = self.bricks,
@@ -135,7 +139,7 @@ function PlayState:update(dt)
                 level = self.level,
                 recoverPoints = self.recoverPoints
             })
-        end
+        --end
     end
 
     for k, brick in pairs(self.bricks) do

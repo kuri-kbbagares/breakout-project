@@ -21,7 +21,8 @@ function StartState:update(dt)
         --gSounds['confirm']:play()
 
         if highlighted == 1 then
-            gStateMachine:change('play', {
+            gStateMachine:change('serve', {
+        score = 0,
         level = 32,
         paddle = Paddle(),
         bricks = LevelMaker.createMap(1),

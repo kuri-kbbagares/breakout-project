@@ -62,6 +62,7 @@ function love.load()
 
     gStateMachine = StateMachine {
         ['start'] = function() return StartState() end,
+        ['serve'] = function() return ServeState() end,
         ['play'] = function() return PlayState() end
     }
     -- Change the state here manually or remove this if other states was created
@@ -112,4 +113,10 @@ function renderHealth(health)
         healthX = healthX + 11
     end
 
+end
+
+function toRenderScore(score)
+  love.graphics.setFont(gFonts['smallFont'])
+  love.graphics.print( 'SCORE: ', VIRTUAL_WIDTH - 100, 10) 
+  love.graphics.printf(tostring(score), VIRTUAL_WIDTH -110, 10, 0, 'center')
 end
