@@ -113,6 +113,12 @@ function renderHealth(health)
         healthX = healthX + 11
     end
 
+        -- render missing health
+    for i = 1, 3 - health do
+        love.graphics.draw(gSprites['hearts'], gFrames['hearts'][2], healthX, 4)
+        healthX = healthX + 11
+    end
+
 end
 
 function toRenderScore(score)
