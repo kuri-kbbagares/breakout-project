@@ -4,21 +4,21 @@ StartState = Class{__includes = BaseState}
 --A helping var. for the highlighting of the menus
 local highlighted = 1
 
---[[function StartState:enter(params)
+function StartState:enter(params)
     self.highScores = params.highScores
 end
-]] -- EDIT THIS FOR CONVENIENCE (DON"T TOUCH)
+-- EDIT THIS FOR CONVENIENCE (DON"T TOUCH)
 
 function StartState:update(dt)
     -- toggle highlighted option if we press an arrow key up or down
     if love.keyboard.wasPressed('up') or love.keyboard.wasPressed('down') then
         highlighted = highlighted == 1 and 2 or 1
-        --gSounds['paddle-hit']:play()
+        gSounds['paddle-hit']:play()
     end
 
     -- confirm whichever option we have selected to change screens
     if love.keyboard.wasPressed('enter') or love.keyboard.wasPressed('return') then
-        --gSounds['confirm']:play()
+        gSounds['confirm']:play()
 
         if highlighted == 1 then
             gStateMachine:change('serve', {
