@@ -38,21 +38,21 @@ function Ball:update(dt)
         self.x = 0
         self.dx = -self.dx
         -- update the sound
-        --gSounds['wall-hit']:play()
+        gSounds['wall-hit']:play()
     end
 
     if self.x >= VIRTUAL_WIDTH - 8 then
         self.x = VIRTUAL_WIDTH - 8
         self.dx = -self.dx
         -- update the sound
-        --gSounds['wall-hit']:play()
+        gSounds['wall-hit']:play()
     end
 
     if self.y <= 0 then
         self.y = 0
         self.dy = -self.dy
         -- update the sound
-        --gSounds['wall-hit']:play()
+        gSounds['wall-hit']:play()
     end
 end
 
