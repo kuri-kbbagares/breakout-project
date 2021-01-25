@@ -25,15 +25,13 @@ function PlayState:update(dt)
     if self.paused then
         if love.keyboard.wasPressed('space') then
             self.paused = false
-        --update
-        --gSounds['pause']:play()
+        gSounds['pause']:play()
         else
             return
         end
     elseif love.keyboard.wasPressed('space') then
         self.paused = true
-        --update
-        --gSounds['pause']:play()
+        gSounds['pause']:play()
         return
     end
 
@@ -54,7 +52,7 @@ function PlayState:update(dt)
         end
 
         --update
-        --gSounds['paddle-hit']:play()
+        gSounds['paddle-hit']:play()
     end
 
     for k, brick in pairs(self.bricks) do
@@ -77,7 +75,7 @@ function PlayState:update(dt)
 
             if self:checkVictory() then
                 --update
-                --gSounds['victory']:play()
+                gSounds['victory']:play()
 
                 gStateMachine:change('victory', {
                     level = self.level,
@@ -122,14 +120,14 @@ function PlayState:update(dt)
     if self.ball.y >= VIRTUAL_HEIGHT then
         self.health = self.health - 1
         --update
-        --gSounds['hurt']:play()
+        gSounds['hurt']:play()
 
-        --[[if self.health == 0 then
+        if self.health == 0 then
             gStateMachine:change('game-over', {
                 score = self.score,
                 highScores = self.highScores
             })
-        else]]
+        else
             gStateMachine:change('serve', {
                 paddle = self.paddle,
                 bricks = self.bricks,
@@ -139,7 +137,7 @@ function PlayState:update(dt)
                 level = self.level,
                 recoverPoints = self.recoverPoints
             })
-        --end
+        end
     end
 
     for k, brick in pairs(self.bricks) do
