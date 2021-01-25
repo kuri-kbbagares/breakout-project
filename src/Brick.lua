@@ -64,8 +64,8 @@ function Brick:hit()
     self.psystem:emit(64)
     
     --update the sounds
-    --gSounds['brick-hit-2']:stop()
-    --gSounds['brick-hit-2']:play()
+    gSounds['brick-hit-2']:stop()
+    gSounds['brick-hit-2']:play()
 
 
     if self.tier > 0 then
@@ -86,8 +86,8 @@ function Brick:hit()
 
     if not self.inPlay then
         --update the sounds
-        --gSounds['brick-hit-1']:stop()
-        --gSounds['brick-hit-1']:play()
+        gSounds['brick-hit-1']:stop()
+        gSounds['brick-hit-1']:play()
     end
 end
 
