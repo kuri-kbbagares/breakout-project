@@ -63,10 +63,20 @@ function love.load()
     gStateMachine = StateMachine {
         ['start'] = function() return StartState() end,
         ['serve'] = function() return ServeState() end,
-        ['play'] = function() return PlayState() end
+        ['play'] = function() return PlayState() end,
+        ['victory'] = function() return VictoryState() end,
+        ['game-over'] = function() return GameOverState() end,
+        ['high-scores'] = function() return HighScoreState() end,
+        ['enter-high-score'] = function() return EnterHighScoreState() end,
+        ['paddle-select'] = function() return PaddleSelectState() end
     }
     -- Change the state here manually or remove this if other states was created
-    gStateMachine:change('start')
+    gStateMachine:change('start', {
+        highScores = loadHighScores()
+    })
+    
+    gSounds['music']:play()
+    gSounds['music']:setLooping(true)
     --?Another Table for keys being Pressed
     love.keyboard.keysPressed = {}    
 end
@@ -102,6 +112,51 @@ function love.draw()
     gStateMachine:render()
 
     push:apply('end')
+end
+function loadHighScores()
+    love.filesystem.exists('breakout-project-main')
+
+    -- if the file doesn't exist, initialize it with some default scores
+    if not love.filesystem.exists('breakout-project-main.lst') then
+        local scores = ''
+        for i = 10, 1, -1 do
+            scores = scores .. 'CTO\n'
+            scores = scores .. tostring(i * 1000) .. '\n'
+        end
+
+        love.filesystem.write('breakout-project-main.lst', scores)
+    end
+
+    -- flag for whether we're reading a name or not
+    local name = true
+    local currentName = nil
+    local counter = 1
+
+    -- initialize scores table with at least 10 blank entries
+    local scores = {}
+
+    for i = 1, 10 do
+        -- blank table; each will hold a name and a score
+        scores[i] = {
+            name = nil,
+            score = nil
+        }
+    end
+
+    -- iterate over each line in the file, filling in names and scores
+    for line in love.filesystem.lines('breakout-project-main.lst') do
+        if name then
+            scores[counter].name = string.sub(line, 1, 3)
+        else
+            scores[counter].score = tonumber(line)
+            counter = counter + 1
+        end
+
+        -- flip the name flag
+        name = not name
+    end
+
+    return scores
 end
 
 function renderHealth(health)
