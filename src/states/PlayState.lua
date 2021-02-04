@@ -160,7 +160,8 @@ function PlayState:render()
 
     self.paddle:render()
     self.ball:render()
-
+    
+    toRenderScore(self.score)
     renderHealth(self.health)
 
     if self.paused then

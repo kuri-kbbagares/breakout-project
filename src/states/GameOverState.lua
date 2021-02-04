@@ -13,7 +13,7 @@ function GameOverState:enter(params)
 end
 
 function GameOverState:update(dt)
-    if love.keyboard.wasPressed('enter') or love.keyboard.wasPressed('return') then
+    if love.keyboard.wasPressed('return') then
         -- see if score is higher than any in the high scores table
         local highScore = false
         

@@ -72,7 +72,7 @@ function love.load()
     }
     -- Change the state here manually or remove this if other states was created
     gStateMachine:change('start', {
-        highScores = loadHighScores()
+        highScores = loadHighScore()
     })
     
     gSounds['music']:play()
@@ -113,14 +113,14 @@ function love.draw()
 
     push:apply('end')
 end
-function loadHighScores()
+function loadHighScore()
     love.filesystem.exists('breakout-project-main')
 
     -- if the file doesn't exist, initialize it with some default scores
     if not love.filesystem.exists('breakout-project-main.lst') then
         local scores = ''
         for i = 10, 1, -1 do
-            scores = scores .. 'CTO\n'
+            scores = scores .. 'NON\n'
             scores = scores .. tostring(i * 1000) .. '\n'
         end
 
@@ -178,6 +178,6 @@ end
 
 function toRenderScore(score)
   love.graphics.setFont(gFonts['smallFont'])
-  love.graphics.print( 'SCORE: ', VIRTUAL_WIDTH - 100, 10) 
-  love.graphics.printf(tostring(score), VIRTUAL_WIDTH -110, 10, 0, 'center')
+  love.graphics.print( 'SCORE: ', VIRTUAL_WIDTH - 70, 15) 
+  love.graphics.printf(tostring(score), VIRTUAL_WIDTH - 50, 15, 30, 'right')
 end

@@ -7,7 +7,7 @@ local highlighted = 1
 function StartState:enter(params)
     self.highScores = params.highScores
 end
--- EDIT THIS FOR CONVENIENCE (DON"T TOUCH)
+
 
 function StartState:update(dt)
     -- toggle highlighted option if we press an arrow key up or down
@@ -22,6 +22,7 @@ function StartState:update(dt)
 
         if highlighted == 1 then
             gStateMachine:change('serve', {
+        highScores = self.highScores,
         score = 0,
         level = 1,
         paddle = Paddle(),
@@ -29,10 +30,13 @@ function StartState:update(dt)
         health = 3,
         ball = Ball(1)
     })
+      else
+        gStateMachine:change('high-scores', {
+        highScores = self.highScores
+        })
         end
     end
 
-    -- we no longer have this globally, so include here
     if love.keyboard.wasPressed('escape') then
         love.event.quit()
     end

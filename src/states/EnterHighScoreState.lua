@@ -73,11 +73,11 @@ function EnterHighScoreState:update(dt)
 end
 
 function EnterHighScoreState:render()
-    love.graphics.setFont(gFonts['medium'])
+    love.graphics.setFont(gFonts['mediumFont'])
     love.graphics.printf('Your score: ' .. tostring(self.score), 0, 30,
         VIRTUAL_WIDTH, 'center')
 
-    love.graphics.setFont(gFonts['large'])
+    love.graphics.setFont(gFonts['largeFont'])
     
     --
     -- render all three characters of the name
@@ -100,7 +100,7 @@ function EnterHighScoreState:render()
     love.graphics.print(string.char(chars[3]), VIRTUAL_WIDTH / 2 + 20, VIRTUAL_HEIGHT / 2)
     love.graphics.setColor(255, 255, 255, 255)
     
-    love.graphics.setFont(gFonts['small'])
+    love.graphics.setFont(gFonts['smallFont'])
     love.graphics.printf('Press Enter to confirm!', 0, VIRTUAL_HEIGHT - 18,
         VIRTUAL_WIDTH, 'center')
 end
